@@ -32,60 +32,85 @@ hrefR = ['https://rozetka.com.ua/ua/acer_nx_a8ceu_00n/p282196218/', 'https://roz
 count = 2500
 totalResult = []
 
-for i in range(1,5):
-   result = []
+# for i in range(1,5):
+#    result = []
        
-   def go():  
-      count2 = 0 
-      def get_content(html):      
-         session = HTMLSession()
-         r = session.get(html, headers=HEADERS)
-         soup = BeautifulSoup(r.text, 'html.parser') 
+#    def go():  
+#       count2 = 0 
+#       def get_content(html):      
+#          session = HTMLSession()
+#          r = session.get(html, headers=HEADERS)
+#          soup = BeautifulSoup(r.text, 'html.parser') 
          
-         try:                                     
-            title = soup.find('h1', class_='product__title').text
-         except Exception:
-            title = ''
-         try:
-            price = soup.find('p', class_='product-prices__big product-prices__big_color_red').text.strip()
-         except Exception:
-            price = ''
+#          try:                                     
+#             title = soup.find('h1', class_='product__title').text
+#          except Exception:
+#             title = ''
+#          try:
+#             price = soup.find('p', class_='product-prices__big product-prices__big_color_red').text.strip()
+#          except Exception:
+#             price = ''
                   
-         try:
-            src = soup.find('img', class_='picture-container__picture').get('src')
-         except Exception:
-            src = ''
+#          try:
+#             src = soup.find('img', class_='picture-container__picture').get('src')
+#          except Exception:
+#             src = ''
          
-         result.append({            
-               'title': title,
-               'price': price,
-               'srcImg': src,
-               'id': f"id{count2}"      
-         })
+#          result.append({            
+#                'title': title,
+#                'price': price,
+#                'srcImg': src,
+#                'id': f"id{count2}"      
+#          })
          
-         totalResult.append({            
-               'title': title,
-               'price': price,
-               'srcImg': src,
-               'id': f"id{count2}"      
-         })
-         print(count2)
+#          totalResult.append({            
+#                'title': title,
+#                'price': price,
+#                'srcImg': src,
+#                'id': f"id{count2}"      
+#          })
+#          print(count2)
          
       
-      for item in hrefR[count-500 : count]:
-         count2 = count2+1      
-         get_content(item) 
+#       for item in hrefR[count-500 : count]:
+#          count2 = count2+1      
+#          get_content(item) 
 
-      with open(f"result{count}.json", "a", encoding="utf-8") as file: 
-         json.dump(result, file, indent=4, ensure_ascii=False)
+#       with open(f"result{count}.json", "a", encoding="utf-8") as file: 
+#          json.dump(result, file, indent=4, ensure_ascii=False)
          
      
-   go()
-   count = count+500
-if totalResult != []:
-   with open(f"resultTotal2.json", "a", encoding="utf-8") as file: 
-      json.dump(totalResult, file, indent=4, ensure_ascii=False)
+#    go()
+#    count = count+500
+# if totalResult != []:
+#    with open(f"resultTotal2.json", "a", encoding="utf-8") as file: 
+#       json.dump(totalResult, file, indent=4, ensure_ascii=False)
+      
+with open('resultTotal.json', encoding="utf-8") as file: 
+      res1 = json.load(file)
+with open("resultTotal2.json", encoding="utf-8") as file: 
+      res2 = json.load(file)
+resuullt = res1 + res2
 
+print(len(resuullt))
+with open(f"resultTotalTotal.json", "a", encoding="utf-8") as file: 
+      json.dump(resuullt, file, indent=4, ensure_ascii=False)
+
+# myList = ['str1', 'str2', 'str3']
+# mySing = ', '.join(myList) # ', '
+# print(mySing)
+
+# python test.py
+
+# dictionary = [{'персона': 'человек',
+#               'марафон': 'гонка бегунов длиной около 26 миль',
+#               'противостоять': 'оставаться сильным, несмотря на давление',
+#               'бежать': 'двигаться со скоростью'}]
+
+
+# result = '; '.join([f'{key}: {value}' for key, value in dictionary[0].items()])
+
+# print(result)
 
 # python main.py
 
